@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# echo ${!#} | tee -a /tmp/libreoffice-viewer.log
+
+for arg in "$@" ; do
+    echo $arg
+    case "$arg" in
+        --calc)
+            echo "Calc Viewer Execute"
+            if [ ! -z "${!#}" ]; then
+                /usr/bin/libreoffice --calc --view --simplemenu ${!#}
+            else
+                /usr/bin/libreoffice --calc --view --simplemenu /usr/share/doc/libreoffice-viewer/empty.ods
+            fi
+
+            ;;
+        --impress)
+            echo "Impress Viewer Execute"
+            if [ ! -z "${!#}" ]; then
+                /usr/bin/libreoffice --impress --view --simplemenu ${!#}
+            else
+                /usr/bin/libreoffice --impress --view --simplemenu /usr/share/doc/libreoffice-viewer/empty.odp
+            fi            
+
+            ;;
+        --writer)
+            echo "Writer Viewer Execute"
+            if [ ! -z "${!#}" ]; then
+                /usr/bin/libreoffice --writer --view --simplemenu ${!#}
+            else
+                /usr/bin/libreoffice --writer --view --simplemenu /usr/share/doc/libreoffice-viewer/empty.odt
+            fi                        
+
+            ;;
+    esac
+done
